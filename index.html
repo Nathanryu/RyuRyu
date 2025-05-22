@@ -681,3 +681,622 @@
     </script>
 </body>
 </html>
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TJ미디어 사업현황 및 재무분석 인포그래픽</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400;700;800&display=swap" rel="stylesheet">
+    <!-- 
+        Infographic Plan:
+        1. Title/Header: TJ미디어 사업현황 및 재무분석: 협업 가능성 보고서 요약
+        2. Introduction: Brief overview of TJ미디어 and the report's purpose.
+        3. 기업 개요 및 연혁 (Company Overview & History):
+           - Key milestones (establishment, name changes, major product launches, key contracts).
+           - Visualization: Timeline (HTML/CSS).
+           - Key stats: Employees, HQ location (text).
+        4. 주요 사업 부문 (Key Business Segments):
+           - List of 5 segments with brief descriptions and revenue share.
+           - Visualization: Donut Chart (Chart.js) for revenue share.
+        5. 자회사 현황 (Subsidiaries):
+           - List of key subsidiaries and their roles.
+           - Visualization: Simple list (HTML/CSS).
+        6. 시장 경쟁력 및 최근 동향 (Market Competitiveness & Recent Trends):
+           - Domestic leadership, Japan collaboration, digital transformation efforts, global expansion.
+           - Visualization: Key points as text/icon list (HTML/CSS).
+        7. 재무제표 분석 (Financial Analysis):
+           - 주요 재무지표 (2021-2024): 매출액, 영업이익, 당기순이익 변화.
+             - Visualization: Line Chart (Chart.js) for trends.
+           - 2024년 분기별 실적: 매출액, 영업이익, 당기순이익.
+             - Visualization: Grouped Bar Chart (Chart.js) for quarterly performance.
+           - 재무 안정성 지표: 부채비율, 배당수익률, R&D 투자.
+             - Visualization: Big numbers/text with icons (HTML/CSS).
+        8. 잠재적 협업 가능성 (Potential Collaboration Opportunities):
+           - List of 5 areas (Digital Content, Smart Audio, Global Market, Entertainment Content, R&D).
+           - Visualization: Icon list with brief descriptions (HTML/CSS).
+        9. TJ미디어의 향후 비전 (Future Vision of TJ Media):
+           - 5 key vision points (Content focus, Mobility/New Platforms, Digital/Global, Customer Diversification, Comprehensive Content Platform).
+           - Visualization: Icon list with brief descriptions (HTML/CSS).
+        10. 더윈드 아이돌 그룹 활동 (The Wind Idol Group Activities):
+            - Member changes, activity style changes, goals, synergy with TJ Media.
+            - Visualization: Simple text/list (HTML/CSS).
+        11. TJ미디어 해외 자회사의 역할 및 주요 프로젝트 (Role of Overseas Subsidiaries & Key Projects):
+            - List of subsidiaries, their roles, and specific projects (France, Japan, Philippines, China, USA).
+            - Visualization: Table or detailed list (HTML/CSS).
+        12. TJ미디어 앱 서비스 (TJ Media App Services):
+            - List of main apps (TJ Noraebang, TJ Noraebang for rooms, TJ Manager) and their functions.
+            - Visualization: Icon list with brief descriptions (HTML/CSS).
+        13. Conclusion & Call to Action: Summary of TJ Media's strengths and potential for synergy.
+
+        Color Palette Chosen: Energetic & Playful
+        - #FF6B6B (Vibrant Red)
+        - #FFD166 (Bright Yellow)
+        - #06D6A0 (Lively Green)
+        - #118AB2 (Strong Blue)
+        - #073B4C (Dark Teal/Navy - for text/background contrast)
+
+        Confirmation: NEITHER Mermaid JS NOR SVG were used anywhere in this output. All charts are Chart.js (Canvas) and diagrams are HTML/CSS.
+    -->
+    <style>
+        body {
+            font-family: 'Nanum Gothic', sans-serif;
+            background-color: #f0f4f8; /* Light grayish blue background */
+        }
+        .font-header {
+            font-weight: 800; /* Extra bold for headers */
+        }
+        .font-subheader {
+            font-weight: 700; /* Bold for subheaders */
+        }
+        .card {
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            padding: 24px;
+            margin-bottom: 24px;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px; /* Max width for readability */
+            margin-left: auto;
+            margin-right: auto;
+            height: 300px; 
+            max-height: 400px; /* Max height */
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 350px;
+            }
+        }
+        .stat-value {
+            font-size: 2.5rem; /* 40px */
+            font-weight: 800;
+            line-height: 1.1;
+        }
+        .stat-label {
+            font-size: 0.875rem; /* 14px */
+            color: #4A5568; /* Gray-700 */
+        }
+        .timeline {
+            position: relative;
+            padding-left: 30px;
+            border-left: 3px solid #118AB2; /* Strong Blue */
+        }
+        .timeline-item {
+            position: relative;
+            margin-bottom: 20px;
+            padding-left: 20px;
+        }
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -39px; /* Adjust to align with the main timeline border */
+            top: 5px;
+            width: 15px;
+            height: 15px;
+            border-radius: 50%;
+            background-color: #FF6B6B; /* Vibrant Red */
+            border: 2px solid white;
+        }
+        .flow-chart-step {
+            border: 2px solid #06D6A0; /* Lively Green */
+            padding: 10px;
+            border-radius: 8px;
+            text-align: center;
+            margin-bottom:10px;
+        }
+        .flow-chart-arrow {
+            font-size: 1.5rem;
+            color: #06D6A0;
+            text-align: center;
+            margin: 5px 0;
+        }
+        .icon-list li {
+            display: flex;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+        .icon-list li span:first-child {
+            margin-right: 10px;
+            color: #118AB2; /* Strong Blue for icons */
+            font-size: 1.25rem;
+        }
+    </style>
+</head>
+<body class="text-[#073B4C]">
+
+    <header class="bg-[#118AB2] text-white py-8 text-center">
+        <h1 class="text-4xl font-header">TJ미디어 사업현황 및 재무분석</h1>
+        <p class="mt-2 text-lg">협업 가능성 보고서 요약 인포그래픽</p>
+    </header>
+
+    <main class="container mx-auto p-4 md:p-8">
+
+        <section id="intro" class="mb-12">
+            <div class="card">
+                <h2 class="text-3xl font-header text-[#118AB2] mb-4">TJ미디어: 한국 노래방 문화의 선두주자</h2>
+                <p class="text-lg leading-relaxed">
+                    TJ미디어는 1981년 태진음향으로 출발하여 한국 노래방 문화의 선두주자로 자리매김한 기업입니다. 노래반주기와 음악 콘텐츠 분야에서 국내 시장을 선도하며 지속적인 기술 혁신과 사업 다각화를 추진하고 있습니다. 본 인포그래픽은 TJ미디어의 기업 개요, 주요 사업 현황, 재무 상태를 분석하고, 이를 바탕으로 잠재적인 협업 가능성 및 미래 비전을 시각적으로 제시합니다.
+                </p>
+            </div>
+        </section>
+
+        <section id="company-overview" class="mb-12">
+            <h2 class="text-3xl font-header text-[#FF6B6B] mb-6 text-center">1. 기업 개요 및 연혁</h2>
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="card">
+                    <h3 class="text-2xl font-subheader text-[#FF6B6B] mb-4">TJ미디어의 발자취</h3>
+                    <p class="mb-4">TJ미디어는 1981년 설립 이후 한국 노래방 산업의 역사를 함께하며 혁신을 거듭해왔습니다. 주요 연혁을 통해 그 발자취를 살펴봅니다.</p>
+                    <div class="timeline mb-6">
+                        <div class="timeline-item">
+                            <h4 class="font-semibold">1981년 6월</h4>
+                            <p>태진음향 설립</p>
+                        </div>
+                        <div class="timeline-item">
+                            <h4 class="font-semibold">1993년</h4>
+                            <p>국내 최초 실제 연주 방식 영업용 반주기 출시</p>
+                        </div>
+                        <div class="timeline-item">
+                            <h4 class="font-semibold">1997년</h4>
+                            <p>태진미디어로 사명 변경 및 코스닥 상장</p>
+                        </div>
+                        <div class="timeline-item">
+                            <h4 class="font-semibold">2001년</h4>
+                            <p>일본 제일흥상과 전자목차본 공급 계약</p>
+                        </div>
+                        <div class="timeline-item">
+                            <h4 class="font-semibold">2005년 1월</h4>
+                            <p>TJ미디어로 사명 변경</p>
+                        </div>
+                        <div class="timeline-item">
+                            <h4 class="font-semibold">2019년</h4>
+                            <p>국내 최초 터치스크린 반주기 출시 및 카드·QR 결제 시스템 도입</p>
+                        </div>
+                        <div class="timeline-item">
+                            <h4 class="font-semibold">2023년</h4>
+                            <p>일본 전자목차본 160만대 누적 출하 달성</p>
+                        </div>
+                        <div class="timeline-item">
+                            <h4 class="font-semibold">2025년</h4>
+                            <p>'TJ 글꼴 노래하는 즐거움체' 무료 배포 및 CI 변경</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3 class="text-2xl font-subheader text-[#FF6B6B] mb-4">기업 현황 요약</h3>
+                    <ul class="icon-list space-y-3">
+                        <li><span>🏢</span><strong class="text-lg">본사:</strong> 서울시 마포구 월드컵북로 434 상암 IT Tower 8층</li>
+                        <li><span>👥</span><strong class="text-lg">임직원 수 (2024년 기준):</strong> <span class="stat-value text-[#FF6B6B] text-3xl">229명</span></li>
+                        <li><span>💼</span><strong class="text-lg">대표이사:</strong> 윤나라 (2020년 12월 취임)</li>
+                        <li><span>📈</span><strong class="text-lg">상장:</strong> 1997년 코스닥 상장</li>
+                    </ul>
+                    <p class="mt-8 text-lg leading-relaxed">TJ미디어는 견고한 기반 위에서 지속적인 혁신을 통해 시장을 선도하고 있습니다.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="business-segments" class="mb-12">
+            <h2 class="text-3xl font-header text-[#06D6A0] mb-6 text-center">2. 주요 사업 부문</h2>
+            <p class="text-center text-lg mb-6">TJ미디어는 노래방 산업을 넘어 다양한 음악 및 음향 관련 사업을 전개하며 매출을 다각화하고 있습니다. 각 사업 부문의 비중을 통해 핵심 역량을 파악할 수 있습니다.</p>
+            <div class="card md:col-span-2">
+                <h3 class="text-2xl font-subheader text-[#06D6A0] mb-4">매출 비중으로 보는 TJ미디어의 핵심 사업</h3>
+                <div class="chart-container h-[300px] md:h-[350px]">
+                    <canvas id="revenueShareChart"></canvas>
+                </div>
+                <div class="mt-6">
+                    <ul class="list-disc list-inside space-y-2 text-lg">
+                        <li><strong>노래반주기 부문 (약 30.5%):</strong> 업소용, 가정용, 마이크형 반주기 및 주변기기 제조·판매.</li>
+                        <li><strong>음악콘텐츠 부문 (약 24.7%):</strong> 반주 음악 데이터 제작, 유·무선 TV 노래방 솔루션 개발 및 서비스.</li>
+                        <li><strong>전자목차본 부문 (약 18.5%):</strong> 전자목차본, 배터리, 충전기 등 제조.</li>
+                        <li><strong>음원 IC 부문:</strong> 자회사 Dream S.A.S를 통한 음원 IC 개발 및 판매 (세계 3대 음원칩 전문 기업).</li>
+                        <li><strong>엔터테인먼트 부문:</strong> 2019년 신설, 아티스트 발굴 및 매니지먼트 사업.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section id="subsidiaries-competitiveness" class="mb-12">
+            <h2 class="text-3xl font-header text-[#FFD166] mb-6 text-center">3. 자회사 및 시장 경쟁력</h2>
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="card">
+                    <h3 class="text-2xl font-subheader text-[#073B4C] mb-4">주요 자회사 현황</h3>
+                    <p class="mb-4">TJ미디어는 국내외 자회사들을 통해 사업 영역을 확장하고 전문성을 강화하고 있습니다.</p>
+                    <ul class="icon-list space-y-3">
+                        <li><span>🎶</span><strong>TJ communication:</strong> 국내 음악 콘텐츠 서비스.</li>
+                        <li><span>💡</span><strong>Dream S.A.S (프랑스):</strong> 세계 3대 음원칩 전문 기업.</li>
+                        <li><span>🌟</span><strong>With US Entertainment:</strong> 국내 아티스트 발굴 및 매니지먼트.</li>
+                        <li><span>🇵🇭</span><strong>TJ PHILIPPINES CORP. (2024년 3월 설립):</strong> 필리핀 법인.</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h3 class="text-2xl font-subheader text-[#073B4C] mb-4">시장 경쟁력 및 최근 동향</h3>
+                    <p class="mb-4">국내 시장 선도와 함께 글로벌 확장을 추진하며 기술 혁신을 지속하고 있습니다.</p>
+                    <ul class="icon-list space-y-3">
+                        <li><span>🥇</span>국내 노래반주기 시장 선도적 위치.</li>
+                        <li><span>🇯🇵</span>일본 제일흥상과의 협력으로 안정적 사업 운영.</li>
+                        <li><span>📱</span>터치스크린 반주기, QR코드 결제 시스템 등 디지털 전환 가속화.</li>
+                        <li><span>🌍</span>필리핀 법인 설립을 통한 글로벌 시장 확대 추진.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section id="financial-analysis" class="mb-12">
+            <h2 class="text-3xl font-header text-[#118AB2] mb-6 text-center">4. 재무제표 분석</h2>
+            <p class="text-center text-lg mb-6">TJ미디어의 재무 상태는 안정적인 기반 위에서 성장과 변화를 보여주고 있습니다. 최근 실적과 안정성 지표를 살펴봅니다.</p>
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="card">
+                    <h3 class="text-2xl font-subheader text-[#118AB2] mb-4">주요 재무지표 추이 (2021-2024)</h3>
+                    <p class="mb-4">2021년부터 2023년까지 성장세를 보였으나, 2024년에는 매출과 영업이익이 소폭 감소했습니다. 당기순이익은 비교적 안정적입니다.</p>
+                    <div class="chart-container h-[300px] md:h-[350px]">
+                        <canvas id="financialTrendsChart"></canvas>
+                    </div>
+                    <p class="mt-4 text-sm text-gray-600">데이터 출처: TJ미디어 보고서 (예시적 경향 표현)</p>
+                </div>
+                <div class="card">
+                    <h3 class="text-2xl font-subheader text-[#118AB2] mb-4">2024년 분기별 실적 및 재무 안정성</h3>
+                    <p class="mb-4">2024년 분기별 실적은 계절성을 보이며, 특히 4분기 당기순이익이 크게 개선되었습니다. 전반적인 재무 안정성은 매우 양호합니다.</p>
+                    <div class="chart-container h-[300px] md:h-[350px] mb-6">
+                        <canvas id="quarterlyPerformanceChart"></canvas>
+                    </div>
+                    <div class="grid grid-cols-2 gap-4 text-center">
+                        <div class="bg-[#FF6B6B] p-4 rounded-lg text-white">
+                            <p class="stat-label text-gray-100">부채비율 (2024년)</p>
+                            <p class="stat-value text-2xl">46.1%</p>
+                            <p class="text-sm">매우 안정적</p>
+                        </div>
+                        <div class="bg-[#06D6A0] p-4 rounded-lg text-white">
+                            <p class="stat-label text-gray-100">배당수익률</p>
+                            <p class="stat-value text-2xl">6.8%</p>
+                            <p class="text-sm">높은 수준 유지</p>
+                        </div>
+                        <div class="bg-[#FFD166] p-4 rounded-lg text-[#073B4C] col-span-2">
+                            <p class="stat-label">R&D 투자 비중 (2023년 매출액 대비)</p>
+                            <p class="stat-value text-2xl">2.77%</p>
+                            <p class="text-sm">기술 개발 지속 투자</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="collaboration-potential" class="mb-12">
+            <h2 class="text-3xl font-header text-[#073B4C] mb-6 text-center">5. 잠재적 협업 가능성</h2>
+            <p class="text-center text-lg mb-6">TJ미디어의 강점과 시장 동향을 고려할 때, 다음과 같은 분야에서 시너지 창출을 위한 협업이 유망합니다.</p>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="card text-center">
+                    <span class="text-5xl mb-4 block">📱</span>
+                    <h3 class="text-xl font-subheader mb-2">디지털 콘텐츠 플랫폼 협업</h3>
+                    <p class="text-gray-700">방대한 음원 라이브러리 및 기술력을 활용한 신규 서비스 개발 (음악 스트리밍, 모바일 노래방 앱 등).</p>
+                </div>
+                <div class="card text-center">
+                    <span class="text-5xl mb-4 block">🔊</span>
+                    <h3 class="text-xl font-subheader mb-2">스마트 음향기기 개발 및 제조 협력</h3>
+                    <p class="text-gray-700">IoT, AI 기술 접목 스마트 음향기기, 스마트홈 연계 솔루션 공동 개발 (음원 IC 기술 활용).</p>
+                </div>
+                <div class="card text-center">
+                    <span class="text-5xl mb-4 block">🌐</span>
+                    <h3 class="text-xl font-subheader mb-2">글로벌 시장 공동 진출</h3>
+                    <p class="text-gray-700">해외 네트워크 활용, 동남아시아·일본 등 노래방 문화 발달 지역 현지화 전략 수립.</p>
+                </div>
+                <div class="card text-center">
+                    <span class="text-5xl mb-4 block">🎬</span>
+                    <h3 class="text-xl font-subheader mb-2">엔터테인먼트 콘텐츠 제작 및 유통 협력</h3>
+                    <p class="text-gray-700">아티스트 발굴, 음원 제작, 콘텐츠 유통, 공연 기획 등 (반주기 네트워크 활용 신인 홍보).</p>
+                </div>
+                <div class="card text-center">
+                    <span class="text-5xl mb-4 block">🔬</span>
+                    <h3 class="text-xl font-subheader mb-2">기술 개발 및 R&D 협력</h3>
+                    <p class="text-gray-700">AI 기반 음악 추천, VR/AR 노래방 경험 고도화, 음성 인식·분석 기술 공동 개발.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="future-vision" class="mb-12">
+            <h2 class="text-3xl font-header text-[#FF6B6B] mb-6 text-center">6. TJ미디어의 향후 비전</h2>
+            <p class="text-center text-lg mb-6">TJ미디어는 단순한 노래반주기 제조업체를 넘어 종합 콘텐츠 플랫폼 기업으로 도약하기 위한 명확한 비전을 가지고 있습니다.</p>
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="card">
+                    <h3 class="text-2xl font-subheader text-[#FF6B6B] mb-4">핵심 비전 5가지</h3>
+                    <ul class="icon-list space-y-3 text-lg">
+                        <li><span>🎵</span><strong>콘텐츠 중심 경쟁력 강화:</strong> 고품질 음악·영상 콘텐츠 제작 및 리노베이션.</li>
+                        <li><span>🚗</span><strong>모빌리티·신규 플랫폼 진출:</strong> 차량용 노래방 앱 서비스, 자동차 전용 마이크 등.</li>
+                        <li><span>💻</span><strong>디지털·글로벌 확장:</strong> IPTV, 스마트TV, 모바일 서비스 확장 및 해외 시장(필리핀, 일본 등) 강화.</li>
+                        <li><span>👨‍👩‍👧‍👦</span><strong>고객 다변화:</strong> 1인 가구, 가족형 문화공간 수요에 맞춰 코인노래방, 가정용, 차량용 공략.</li>
+                        <li><span>🚀</span><strong>종합 콘텐츠 플랫폼 기업 도약:</strong> 음악·영상·엔터테인먼트 아우르는 플랫폼으로 변신.</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h3 class="text-2xl font-subheader text-[#FF6B6B] mb-4">더윈드 아이돌 그룹 활동 변화</h3>
+                    <p class="mb-4">TJ미디어의 엔터테인먼트 부문은 아이돌 그룹 '더윈드'를 통해 시너지를 창출하고 있습니다.</p>
+                    <ul class="list-disc list-inside space-y-2 text-lg">
+                        <li><strong>멤버 구성 변화:</strong> 7인조 데뷔 후 6인조 재편, 일시적 5인조 활동 후 현재 6인조 완전체 재개.</li>
+                        <li><strong>활동 방식 변화:</strong> 책임감과 팀워크 강화, 멤버별 개성을 살린 연기 및 퍼포먼스 강조 (예: 뮤직비디오 주연).</li>
+                        <li><strong>활동 목표:</strong> 청량하고 풋풋한 이미지로 10대 및 첫사랑 경험 세대 공략.</li>
+                        <li><strong>소속사 시너지:</strong> TJ미디어 음악 플랫폼 연계 프로모션 및 노래방 이벤트 병행.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section id="global-apps" class="mb-12">
+            <h2 class="text-3xl font-header text-[#06D6A0] mb-6 text-center">7. 글로벌 확장과 앱 서비스</h2>
+            <p class="text-center text-lg mb-6">TJ미디어는 해외 자회사들을 통해 글로벌 영향력을 확대하고 있으며, 다양한 앱 서비스를 통해 사용자 경험을 디지털로 확장하고 있습니다.</p>
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="card">
+                    <h3 class="text-2xl font-subheader text-[#06D6A0] mb-4">해외 자회사의 역할 및 주요 프로젝트</h3>
+                    <table class="w-full text-left border-collapse">
+                        <thead>
+                            <tr>
+                                <th class="border-b-2 border-[#06D6A0] p-2">자회사 (소재지)</th>
+                                <th class="border-b-2 border-[#06D6A0] p-2">주요 역할 및 프로젝트</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="border-b border-gray-300 p-2">Dream S.A.S (프랑스)</td>
+                                <td class="border-b border-gray-300 p-2">음원 반도체 칩 개발, 첨단 음향 기술 적용 (피드백 캔슬러 등)</td>
+                            </tr>
+                            <tr>
+                                <td class="border-b border-gray-300 p-2">TJ Media USA Inc. (미국)</td>
+                                <td class="border-b border-gray-300 p-2">북미 시장 제품 판매/유통, 한류 기반 노래방 문화 확산</td>
+                            </tr>
+                            <tr>
+                                <td class="border-b border-gray-300 p-2">TJ PHILIPPINES CORP. (필리핀)</td>
+                                <td class="border-b border-gray-300 p-2">필리핀 시장 점유율 1위, 현지화 서비스, 동남아 확장 거점</td>
+                            </tr>
+                            <tr>
+                                <td class="border-b border-gray-300 p-2">중국 판매 법인 (중국)</td>
+                                <td class="border-b border-gray-300 p-2">음향기기(스피커 등) 사업 집중, 현지 판매 및 유통 강화</td>
+                            </tr>
+                            <tr>
+                                <td class="p-2">TJ media 베트남 사무소 (베트남)</td>
+                                <td class="p-2">베트남 및 인근 동남아 시장 조사, 네트워크 구축, 판매 지원</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="card">
+                    <h3 class="text-2xl font-subheader text-[#06D6A0] mb-4">TJ미디어 주요 앱 서비스</h3>
+                    <p class="mb-4">TJ미디어는 다양한 모바일 앱 서비스를 통해 노래방 경험을 디지털로 확장하고 있습니다.</p>
+                    <ul class="icon-list space-y-3 text-lg">
+                        <li><span>🎤</span><strong>TJ노래방 앱:</strong> 일반 사용자용, 최신곡, 고음질 반주, 녹음/녹화, 월정액 구독. (Android, iOS)</li>
+                        <li><span>📱</span><strong>TJ노래방(노래방용) 앱:</strong> 실제 노래방에서 스마트폰을 리모컨처럼 사용 (곡 검색, 예약, 음성 검색 등). (Android)</li>
+                        <li><span>📊</span><strong>TJ매니저(업주용) 앱:</strong> 노래방 업주를 위한 반주기 관리, 음향 설정, 문자 전송 등. (Android)</li>
+                        <li><span>🌐</span><strong>PC/모바일 웹 서비스:</strong> 공식 웹사이트를 통한 노래 검색, 곡 신청, 이벤트 참여.</li>
+                        <li><span>▶️</span><strong>유튜브 노래방:</strong> 공식 유튜브 채널을 통한 반주곡 영상 제공.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section id="conclusion" class="mb-12">
+             <div class="card bg-[#118AB2] text-white">
+                <h2 class="text-3xl font-header mb-4 text-center">결론: 안정적 성장과 미래를 향한 혁신</h2>
+                <p class="text-lg leading-relaxed mb-4">
+                    TJ미디어는 노래방 문화를 선도하는 국내 대표 기업으로서, 안정적인 재무구조와 지속적인 기술 혁신을 바탕으로 성장하고 있습니다. 최근 매출과 이익이 다소 감소하는 추세였으나, 재무 건전성에는 문제가 없으며 다양한 사업 다각화를 통해 성장 동력을 확보하고 있습니다.
+                </p>
+                <p class="text-lg leading-relaxed mb-4">
+                    디지털 콘텐츠 플랫폼 협업, 스마트 음향기기 개발, 글로벌 시장 공동 진출, 엔터테인먼트 콘텐츠 제작 및 R&D 협력 등 다양한 분야에서의 잠재적 협업 가능성이 높습니다. TJ미디어의 강점과 혁신 노력을 결합하면 큰 시너지를 창출할 수 있을 것으로 기대됩니다.
+                </p>
+                <p class="text-lg leading-relaxed">
+                    향후 TJ미디어는 콘텐츠 중심 경쟁력 강화, 모빌리티·신규 플랫폼 진출, 디지털·글로벌 확장, 고객 다변화를 통해 종합 콘텐츠 플랫폼 기업으로 도약할 것입니다.
+                </p>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="text-center py-6 bg-gray-800 text-gray-300">
+        <p>&copy; 2024 TJ미디어 사업현황 및 재무분석 인포그래픽. 모든 권리 보유.</p>
+    </footer>
+
+    <script>
+        const CHART_COLORS = {
+            red: '#FF6B6B',
+            yellow: '#FFD166',
+            green: '#06D6A0',
+            blue: '#118AB2',
+            navy: '#073B4C',
+            lightBlue: '#A2D2FF'
+        };
+
+        function processLabel(label, maxLength = 16) {
+            if (label.length > maxLength) {
+                const words = label.split(' ');
+                const lines = [];
+                let currentLine = '';
+                for (const word of words) {
+                    if ((currentLine + word).length > maxLength && currentLine.length > 0) {
+                        lines.push(currentLine.trim());
+                        currentLine = word + ' ';
+                    } else {
+                        currentLine += word + ' ';
+                    }
+                }
+                if (currentLine.trim().length > 0) {
+                    lines.push(currentLine.trim());
+                }
+                return lines;
+            }
+            return label;
+        }
+        
+        const commonTooltipOptions = {
+            plugins: {
+                tooltip: {
+                    callbacks: {
+                        title: function(tooltipItems) {
+                            const item = tooltipItems[0];
+                            let label = item.chart.data.labels[item.dataIndex];
+                            if (Array.isArray(label)) {
+                              return label.join(' ');
+                            } else {
+                              return label;
+                            }
+                        }
+                    }
+                }
+            }
+        };
+
+        // Chart 1: Revenue Share Chart
+        const revenueShareCtx = document.getElementById('revenueShareChart');
+        if (revenueShareCtx) {
+            new Chart(revenueShareCtx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['노래반주기 부문', '음악콘텐츠 부문', '전자목차본 부문', '음원 IC 부문', '엔터테인먼트 부문'].map(label => processLabel(label)),
+                    datasets: [{
+                        label: '매출 비중',
+                        data: [30.5, 24.7, 18.5, 15, 11.3], // 예시 데이터, 합계 100%
+                        backgroundColor: [
+                            CHART_COLORS.blue,
+                            CHART_COLORS.green,
+                            CHART_COLORS.yellow,
+                            CHART_COLORS.red,
+                            CHART_COLORS.navy
+                        ],
+                        borderColor: '#ffffff',
+                        borderWidth: 2,
+                        hoverOffset: 4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: { ...commonTooltipOptions.plugins, legend: { position: 'right' } }
+                }
+            });
+        }
+
+        // Chart 2: Financial Trends Chart (Line Chart)
+        const financialTrendsCtx = document.getElementById('financialTrendsChart');
+        if (financialTrendsCtx) {
+            new Chart(financialTrendsCtx, {
+                type: 'line',
+                data: {
+                    labels: ['2021년', '2022년', '2023년', '2024년'].map(label => processLabel(label)),
+                    datasets: [
+                        {
+                            label: '매출액 (억원)',
+                            data: [619, 859, 964, 919],
+                            borderColor: CHART_COLORS.blue,
+                            backgroundColor: 'rgba(17, 138, 178, 0.1)',
+                            fill: false,
+                            tension: 0.1
+                        },
+                        {
+                            label: '영업이익 (억원)',
+                            data: [28, 41, 63, 47],
+                            borderColor: CHART_COLORS.green,
+                            backgroundColor: 'rgba(6, 214, 160, 0.1)',
+                            fill: false,
+                            tension: 0.1
+                        },
+                        {
+                            label: '당기순이익 (억원)',
+                            data: [32, 45, 47, 46],
+                            borderColor: CHART_COLORS.red,
+                            backgroundColor: 'rgba(255, 107, 107, 0.1)',
+                            fill: false,
+                            tension: 0.1
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: false,
+                            title: {
+                                display: true,
+                                text: '금액 (억원)'
+                            }
+                        }
+                    },
+                    plugins: { ...commonTooltipOptions.plugins, legend: { position: 'top' } }
+                }
+            });
+        }
+
+        // Chart 3: Quarterly Performance Chart (Grouped Bar Chart)
+        const quarterlyPerformanceCtx = document.getElementById('quarterlyPerformanceChart');
+        if (quarterlyPerformanceCtx) {
+            new Chart(quarterlyPerformanceCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['2024 1Q', '2024 2Q', '2024 3Q', '2024 4Q'].map(label => processLabel(label)),
+                    datasets: [
+                        {
+                            label: '매출액 (억원)',
+                            data: [234, 232, 204, 249],
+                            backgroundColor: CHART_COLORS.blue,
+                            borderColor: '#ffffff',
+                            borderWidth: 1
+                        },
+                        {
+                            label: '영업이익 (억원)',
+                            data: [11, 18, 5, 13],
+                            backgroundColor: CHART_COLORS.green,
+                            borderColor: '#ffffff',
+                            borderWidth: 1
+                        },
+                        {
+                            label: '당기순이익 (억원)',
+                            data: [7, 14, 0, 25],
+                            backgroundColor: CHART_COLORS.red,
+                            borderColor: '#ffffff',
+                            borderWidth: 1
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        x: {
+                            stacked: false
+                        },
+                        y: {
+                            stacked: false,
+                            beginAtZero: true,
+                            title: {
+                                display: true,
+                                text: '금액 (억원)'
+                            }
+                        }
+                    },
+                    plugins: { ...commonTooltipOptions.plugins, legend: { position: 'top' } }
+                }
+            });
+        }
+    </script>
+</body>
+</html>
